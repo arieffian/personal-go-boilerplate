@@ -1,0 +1,27 @@
+###########################################################################
+# Basic Schemas
+#####################################
+User:
+  $ref: "./common/user.yml"
+
+###########################################################################
+# Errors Schemas
+###########################################################################
+ErrorBadRequest:
+  $ref: "./errors/400/response.yml"
+ErrorUnauthorized:
+  $ref: "./errors/401/response.yml"
+ErrorForbidden:
+  $ref: "./errors/403/response.yml"
+ErrorNotFound:
+  $ref: "./errors/404/response.yml"
+ErrorInternalServer:
+  $ref: "./errors/500/response.yml"
+ErrorUnexpected:
+  $ref: "./errors/unexpected/response.yml"
+###########################################################################
+# Category: users
+###########################################################################
+
+GetUserByIdResponse:
+  $ref: "./../operations/users/get_user_by_id/response.yml"

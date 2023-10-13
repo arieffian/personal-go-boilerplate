@@ -1,0 +1,7 @@
+internal_server_error:
+  value: 
+    code: 1001
+    message: 'network error'
+    data: {}
+    trace:
+      - line: 50

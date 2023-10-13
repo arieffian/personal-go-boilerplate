@@ -1,0 +1,7 @@
+description: 404 Not Found Error
+content:
+  application/json:
+    schema:
+      $ref: "./../../schemas/errors/404/response.yml"
+    examples:
+      $ref: "./../../schemas/errors/404/examples.yml"

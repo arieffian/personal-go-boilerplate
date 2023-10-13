@@ -1,0 +1,7 @@
+description: 500 Internal Server Error
+content:
+  application/json:
+    schema:
+      $ref: "./../../schemas/errors/500/response.yml"
+    examples:
+      $ref: "./../../schemas/errors/500/examples.yml"

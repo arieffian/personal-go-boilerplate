@@ -1,0 +1,32 @@
+summary: Get a User by id
+description: Get a User by id
+security:
+  # This operation needs the client to be authenticated
+  - ApiKeyAuth: []
+operationId: GetUserByID
+tags:
+  - users
+parameters:
+  - name: id
+    in: path
+    description: Attachment ID
+    required: true
+    schema:
+      type: string
+responses:
+  "201":
+    description: Success Request
+    content:
+      application/json:
+        schema:
+          $ref: "./response.yml"
+  "400":
+    $ref: "./../../../responses/errors/400-bad-request-error.yml"
+  "401":
+    $ref: "./../../../responses/errors/401-unauthorized-error.yml"
+  "403":
+    $ref: "./../../../responses/errors/401-unauthorized-error.yml"
+  "500":
+    $ref: "./../../../responses/errors/500-internal-server-error.yml"
+  default:
+    $ref: "./../../../responses/errors/unexpected-error.yml"

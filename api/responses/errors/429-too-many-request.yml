@@ -1,0 +1,7 @@
+description: 429 Too Many Request
+content:
+  application/json:
+    schema:
+      $ref: "./../../schemas/errors/429/response.yml"
+    examples:
+      $ref: "./../../schemas/errors/429/examples.yml"

@@ -1,0 +1,8 @@
+type: object
+properties:
+  param:
+    type: string
+  messages:
+    type: array
+    items:
+      type: string

@@ -1,0 +1,7 @@
+name: limit
+in: query
+description: number of item to return
+required: false
+schema:
+  type: integer
+  format: int32

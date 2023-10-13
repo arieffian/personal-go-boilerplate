@@ -1,0 +1,2 @@
+# post:
+#   $ref: "./../operations/attachments/create_new_attachment/operation.yml"

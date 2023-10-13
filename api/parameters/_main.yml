@@ -1,0 +1,4 @@
+limitParam:
+  $ref: "./limit-param.yml"
+offsetParam:
+  $ref: "./offset-param.yml"

@@ -1,0 +1,6 @@
+bad_request:
+  value: 
+    code: 1002
+    message: 'field should not be empty'
+    trace:
+      - line: 10

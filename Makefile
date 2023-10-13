@@ -16,6 +16,17 @@ dependencies: ## install dependencies
 	go mod verify
 	go mod vendor
 
+# .PHONY: generate-mocks
+# generate-mocks: ## generate mocks
+# 	go mod tidy
+# 	go mod verify
+# 	go mod vendor
+
+.PHONY: generate-api-schema
+generate-api-schema: ## generate api schema using swagger
+	./scripts/bundle-api.sh
+	./scripts/generate-code.sh
+
 .PHONY: run-local
 run-local: ## run the application locally
 	go run cmd/app/main.go
