@@ -2,9 +2,9 @@ package routers
 
 import (
 	"github.com/arieffian/go-boilerplate/internal/handlers"
+	"github.com/arieffian/go-boilerplate/internal/pkg/redis"
 	"github.com/arieffian/go-boilerplate/internal/repositories"
 	"github.com/gofiber/fiber/v2"
-	"github.com/redis/go-redis/v9"
 	"gorm.io/gorm"
 )
 
@@ -15,12 +15,13 @@ type Router struct {
 
 type NewRouterParams struct {
 	Db    *gorm.DB
-	Redis *redis.Client
+	Redis redis.RedisService
 }
 
 func NewRouter(p NewRouterParams) (*Router, error) {
 	userRepo := repositories.NewUserRepository(repositories.NewUserRepositoryParams{
-		Db: p.Db,
+		Db:    p.Db,
+		Redis: p.Redis,
 	})
 
 	healthcheckHandler := handlers.NewHealthCheckHandler()
