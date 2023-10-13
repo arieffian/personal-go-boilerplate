@@ -3,19 +3,19 @@ package handlers
 import (
 	"errors"
 
-	"github.com/arieffian/go-boilerplate/internal/repositories"
+	userRepository "github.com/arieffian/go-boilerplate/internal/repositories/users"
 	"github.com/gofiber/fiber/v2"
 	"gorm.io/gorm"
 )
 
 type userHandler struct {
-	userRepo repositories.UserInterface
+	userRepo userRepository.UserInterface
 }
 
 var _ UserService = (*userHandler)(nil)
 
 type NewUserHandlerParams struct {
-	UserRepo repositories.UserInterface
+	UserRepo userRepository.UserInterface
 }
 
 func (h userHandler) ListUsers(c *fiber.Ctx) error {
@@ -23,7 +23,9 @@ func (h userHandler) ListUsers(c *fiber.Ctx) error {
 }
 
 func (h userHandler) GetUserById(c *fiber.Ctx) error {
-	user, err := h.userRepo.GetUserById(c.Params("id"))
+	user, err := h.userRepo.GetUserById(c.Context(), userRepository.GetUserByIdParams{
+		UserId: c.Params("id"),
+	})
 
 	if err != nil {
 		status := fiber.StatusNotFound
@@ -41,7 +43,7 @@ func (h userHandler) GetUserById(c *fiber.Ctx) error {
 	response := Response{
 		Status:  fiber.StatusOK,
 		Message: "OK",
-		Data:    user,
+		Data:    user.User,
 	}
 	return c.Status(response.Status).JSON(response)
 }

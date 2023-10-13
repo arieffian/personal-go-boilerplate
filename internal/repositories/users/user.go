@@ -1,4 +1,4 @@
-package repositories
+package users
 
 import (
 	"context"
@@ -21,26 +21,27 @@ type NewUserRepositoryParams struct {
 	Redis redis.RedisService
 }
 
-// todo: add ctx on every function
-func (r *userRepository) GetUserById(id string) (*models.User, error) {
+func (r *userRepository) GetUserById(ctx context.Context, p GetUserByIdParams) (*GetUserByIdResponse, error) {
 	var user models.User
 
-	err := r.redisDb.GetCache(context.Background(), id, &user)
+	err := r.redisDb.GetCache(ctx, p.UserId, &user)
 
 	if err != nil {
 		if err != redis_pkg.Nil {
 			return nil, err
 		}
 
-		if err := r.db.First(&user, "id = ?", id).Error; err != nil {
+		if err := r.db.First(&user, "id = ?", p.UserId).Error; err != nil {
 			return nil, err
 		}
-		if err := r.redisDb.SetCacheWithExpiration(context.Background(), id, user, 0); err != nil {
+		if err := r.redisDb.SetCacheWithExpiration(context.Background(), p.UserId, user, 0); err != nil {
 			return nil, err
 		}
 	}
 
-	return &user, nil
+	return &GetUserByIdResponse{
+		User: user,
+	}, nil
 }
 
 func NewUserRepository(p NewUserRepositoryParams) *userRepository {
