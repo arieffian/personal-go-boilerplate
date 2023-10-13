@@ -3,7 +3,7 @@ package routers
 import (
 	"github.com/arieffian/go-boilerplate/internal/handlers"
 	"github.com/arieffian/go-boilerplate/internal/pkg/redis"
-	"github.com/arieffian/go-boilerplate/internal/repositories"
+	userRepository "github.com/arieffian/go-boilerplate/internal/repositories/users"
 	"github.com/gofiber/fiber/v2"
 	"gorm.io/gorm"
 )
@@ -19,7 +19,7 @@ type NewRouterParams struct {
 }
 
 func NewRouter(p NewRouterParams) (*Router, error) {
-	userRepo := repositories.NewUserRepository(repositories.NewUserRepositoryParams{
+	userRepo := userRepository.NewUserRepository(userRepository.NewUserRepositoryParams{
 		Db:    p.Db,
 		Redis: p.Redis,
 	})
