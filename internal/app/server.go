@@ -6,6 +6,7 @@ import (
 
 	"github.com/arieffian/go-boilerplate/internal/config"
 	"github.com/arieffian/go-boilerplate/internal/database"
+	"github.com/arieffian/go-boilerplate/internal/pkg/redis"
 	"github.com/arieffian/go-boilerplate/internal/routers"
 	"github.com/gofiber/fiber/v2"
 )
@@ -26,18 +27,16 @@ func NewServer(ctx context.Context, cfg config.Config) (*Server, error) {
 		log.Fatalf("Failed to connect to database. %+v", err)
 	}
 
-	redis := database.NewRedisConnection(database.RedisConfig{
+	redis := redis.NewRedisConnection(redis.RedisConfig{
 		Host: cfg.RedisHost,
 		Port: cfg.RedisPort,
 	})
-
-	redisClient := redis.CreateRedisClient(context.Background())
 
 	app := fiber.New()
 
 	api, err := routers.NewRouter(routers.NewRouterParams{
 		Db:    dbClient,
-		Redis: redisClient,
+		Redis: redis,
 	})
 
 	if err != nil {
