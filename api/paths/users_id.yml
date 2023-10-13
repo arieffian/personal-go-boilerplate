@@ -1,0 +1,6 @@
+get:
+  $ref: "./../operations/users/get_user_by_id/operation.yml"
+# put:
+#   $ref: "./../operations/users/update_user_by_id/operation.yml"
+# delete:
+#   $ref: "./../operations/users/delete_user_by_id/operation.yml"

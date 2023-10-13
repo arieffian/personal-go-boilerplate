@@ -1,0 +1,10 @@
+type: object
+description: User model.
+required:
+    - id
+    - name
+properties:
+  id:
+    type: string
+  name:
+    type: string

@@ -1,0 +1,18 @@
+type: object
+required:
+  - code
+  - message
+properties:
+  code:
+    type: integer
+    format: int32
+  message:
+    type: string
+  data:
+    type: object
+  trace:
+    type: array
+    items:
+      properties:
+        line:
+          type: string

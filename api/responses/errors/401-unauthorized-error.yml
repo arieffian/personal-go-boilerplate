@@ -1,0 +1,7 @@
+description: 401 Unauthorized Request Error
+content:
+  application/json:
+    schema:
+      $ref: "./../../schemas/errors/401/response.yml"
+    examples:
+      $ref: "./../../schemas/errors/401/examples.yml"

@@ -1,0 +1,7 @@
+description: 400 Bad Request Error
+content:
+  application/json:
+    schema:
+      $ref: "./../../schemas/errors/400/response.yml"
+    examples:
+      $ref: "./../../schemas/errors/400/examples.yml"

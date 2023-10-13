@@ -1,0 +1,7 @@
+not_found:
+  value: 
+    code: 1004
+    message: 'resource not found'
+    data: {}
+    trace:
+      - line: 40

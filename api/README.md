@@ -1,8 +1,17 @@
-# `/api`
+# Kuncie APIv2 OpenAPI Definition
 
-OpenAPI/Swagger specs, JSON schema files, protocol definition files.
+This directory contains OpenAPI definition YML files. To 
 
-Examples:
+## Directory Structures
 
-* https://github.com/kubernetes/kubernetes/tree/master/api
-* https://github.com/moby/moby/tree/master/api
+
+```
+api/
+├─ operations/         Binary executables.   
+├─ parameters/         Configuration for local development
+├─ paths/              Configuration for local development
+├─ responses/          Configuration for local development
+├─ schemas/            Configuration for local development
+├─ security-schemas/   Configuration for local development
+├─ main.yml
+```

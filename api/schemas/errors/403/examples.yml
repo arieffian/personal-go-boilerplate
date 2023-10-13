@@ -1,0 +1,7 @@
+unauthorized:
+  value: 
+    code: 1003
+    message: 'forbidden access'
+    data: {}
+    trace:
+      - line: 30

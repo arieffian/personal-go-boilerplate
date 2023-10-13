@@ -1,0 +1,14 @@
+BadRequestError:
+  $ref: "./errors/400-bad-request-error.yml"
+UnauthorizedError:
+  $ref: "./errors/401-unauthorized-error.yml"
+ForbiddenError:
+  $ref: "./errors/403-forbidden-error.yml"
+NotFoundError:
+  $ref: "./errors/404-not-found-error.yml"
+TooManyRequest:
+  $ref: "./errors/429-too-many-request.yml"
+InternalServerError:
+  $ref: "./errors/500-internal-server-error.yml"
+UnexpectedError:
+  $ref: "./errors/unexpected-error.yml"

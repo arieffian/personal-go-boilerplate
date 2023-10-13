@@ -3,6 +3,7 @@ package handlers
 import (
 	"errors"
 
+	"github.com/arieffian/go-boilerplate/internal/pkg/generated"
 	userRepository "github.com/arieffian/go-boilerplate/internal/repositories/users"
 	"github.com/gofiber/fiber/v2"
 	"gorm.io/gorm"
@@ -32,20 +33,27 @@ func (h userHandler) GetUserById(c *fiber.Ctx) error {
 		if errors.Is(err, gorm.ErrRecordNotFound) {
 			status = fiber.StatusNotFound
 		}
-		response := Response{
-			Status:  status,
-			Message: err.Error(),
-			Data:    nil,
+		response := generated.GetUserByIdResponse{
+			Code:    int32(status),
+			Message: "OK",
+			Data: &generated.User{
+				Id:   user.User.ID,
+				Name: user.User.Name,
+			},
 		}
-		return c.Status(response.Status).JSON(response)
+		return c.Status(int(response.Code)).JSON(response)
 	}
 
-	response := Response{
-		Status:  fiber.StatusOK,
+	response := generated.GetUserByIdResponse{
+		Code:    fiber.StatusOK,
 		Message: "OK",
-		Data:    user.User,
+		Data: &generated.User{
+			Id:   user.User.ID,
+			Name: user.User.Name,
+		},
 	}
-	return c.Status(response.Status).JSON(response)
+
+	return c.Status(int(response.Code)).JSON(response)
 }
 
 func NewUserHandler(p NewUserHandlerParams) *userHandler {

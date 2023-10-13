@@ -22,3 +22,5 @@ go.work
 
 # air binaries
 tmp/
+
+.DS_Store

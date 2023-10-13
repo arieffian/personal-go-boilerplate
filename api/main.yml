@@ -1,0 +1,28 @@
+openapi: "3.0.0"
+info:
+  version: 1.0.0-$REVISION
+  title: OpenAPI Definition for Kuncie Unified Platform.
+  license:
+    name: MIT
+servers:
+  - url: https://arieffian.com/api/v1
+    description: development server
+paths:
+  # Users
+  # /users:
+  #   $ref: "./paths/users.yml"
+  /users/{id}:
+    $ref: "./paths/users_id.yml"
+
+components:
+  schemas:
+    $ref: "./schemas/_main.yml"
+  responses:
+    $ref: "./responses/_main.yml"
+  parameters:
+    $ref: "./parameters/_main.yml"
+  securitySchemes:
+    $ref: "./security-schemes/_main.yml"
+security:
+  - ApiKeyAuth: []
+  - BearerAuth: []

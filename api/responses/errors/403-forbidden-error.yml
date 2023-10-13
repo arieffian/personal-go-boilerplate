@@ -1,0 +1,7 @@
+description: 403 Forbidden Error
+content:
+  application/json:
+    schema:
+      $ref: "./../../schemas/errors/403/response.yml"
+    examples:
+      $ref: "./../../schemas/errors/403/examples.yml"
