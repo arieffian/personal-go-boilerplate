@@ -4,7 +4,7 @@ import (
 	"context"
 
 	"github.com/arieffian/go-boilerplate/internal/models"
-	"github.com/arieffian/go-boilerplate/internal/pkg/redis"
+	"github.com/arieffian/providers/pkg/redis"
 	redis_pkg "github.com/redis/go-redis/v9"
 	"gorm.io/gorm"
 )
