@@ -1,6 +1,6 @@
 module github.com/arieffian/go-boilerplate
 
-go 1.20
+go 1.22
 
 require (
 	github.com/gofiber/fiber/v2 v2.52.5
