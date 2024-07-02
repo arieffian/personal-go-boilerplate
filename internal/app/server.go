@@ -5,9 +5,9 @@ import (
 	"log"
 
 	"github.com/arieffian/go-boilerplate/internal/config"
-	"github.com/arieffian/go-boilerplate/internal/database"
-	"github.com/arieffian/go-boilerplate/internal/pkg/redis"
 	"github.com/arieffian/go-boilerplate/internal/routers"
+	database "github.com/arieffian/providers/pkg/db"
+	"github.com/arieffian/providers/pkg/redis"
 	"github.com/gofiber/fiber/v2"
 )
 
