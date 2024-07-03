@@ -3,7 +3,7 @@ module github.com/arieffian/go-boilerplate
 go 1.22
 
 require (
-	github.com/arieffian/providers v1.0.0
+	github.com/arieffian/providers v1.0.1
 	github.com/gofiber/fiber/v2 v2.52.5
 	github.com/redis/go-redis/v9 v9.5.3
 	github.com/sirupsen/logrus v1.9.3

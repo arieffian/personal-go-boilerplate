@@ -46,6 +46,7 @@ func main() {
 
 	<-c
 	fmt.Println("Gracefully shutting down...")
+	_ = server.Redis.Close(ctx)
 	_ = server.Shutdown(ctx)
 
 	fmt.Println("Fiber was successful shutdown.")

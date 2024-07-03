@@ -9,7 +9,7 @@ type HealthcheckService interface {
 }
 
 type UserService interface {
-	ListUsers(c *fiber.Ctx) error
+	GetUsers(c *fiber.Ctx) error
 	GetUserById(c *fiber.Ctx) error
 	// CreateUser(c *fiber.Ctx) error
 	// UpdateUser(c *fiber.Ctx) error

@@ -55,6 +55,13 @@ type GetUserByIdResponse struct {
 	Message string `json:"message"`
 }
 
+// GetUsersResponse defines model for GetUsersResponse.
+type GetUsersResponse struct {
+	Code    int32   `json:"code"`
+	Data    *[]User `json:"data,omitempty"`
+	Message string  `json:"message"`
+}
+
 // User model.
 type User struct {
 	Id   string `json:"id"`
@@ -72,3 +79,9 @@ type UnauthorizedError = ErrorUnauthorized
 
 // UnexpectedError defines model for UnexpectedError.
 type UnexpectedError = ErrorUnexpected
+
+// GetUsersParams defines parameters for GetUsers.
+type GetUsersParams struct {
+	// Page
+	Page int32 `form:"page" json:"page"`
+}

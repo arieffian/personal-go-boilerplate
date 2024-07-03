@@ -14,6 +14,16 @@ type GetUserByIdResponse struct {
 	User models.User
 }
 
-type UserInterface interface {
+type GetUsersParams struct {
+	Limit  int
+	Offset int
+}
+
+type GetUsersResponse struct {
+	Users []models.User
+}
+
+type UserRepository interface {
 	GetUserById(ctx context.Context, p GetUserByIdParams) (*GetUserByIdResponse, error)
+	GetUsers(ctx context.Context, p GetUsersParams) (*GetUsersResponse, error)
 }

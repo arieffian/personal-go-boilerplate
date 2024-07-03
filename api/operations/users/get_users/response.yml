@@ -1,0 +1,14 @@
+type: object
+required:
+  - code
+  - message
+properties:
+  code:
+    type: integer
+    format: int32
+  message:
+    type: string
+  data:
+    type: array
+    items:
+      $ref: "./../../../schemas/common/user.yml"
