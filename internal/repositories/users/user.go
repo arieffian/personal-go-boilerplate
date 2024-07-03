@@ -85,6 +85,21 @@ func (r *userRepository) GetUsers(ctx context.Context, p GetUsersParams) (*GetUs
 
 }
 
+func (r *userRepository) CreateNewUser(ctx context.Context, p CreateNewUserParams) (*CreateNewUserResponse, error) {
+	user := models.User{
+		Name: p.Name,
+	}
+
+	err := r.db.Db.Create(&user).Error
+	if err != nil {
+		return nil, err
+	}
+
+	return &CreateNewUserResponse{
+		User: user,
+	}, nil
+}
+
 func NewUserRepository(p NewUserRepositoryParams) UserRepository {
 
 	return &userRepository{

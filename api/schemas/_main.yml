@@ -19,6 +19,7 @@ ErrorInternalServer:
   $ref: "./errors/500/response.yml"
 ErrorUnexpected:
   $ref: "./errors/unexpected/response.yml"
+  
 ###########################################################################
 # Category: users
 ###########################################################################
@@ -28,3 +29,9 @@ GetUserByIdResponse:
 
 GetUsersResponse:
   $ref: "./../operations/users/get_users/response.yml"
+  
+CreateNewUserRequest:
+  $ref: "./../operations/users/create_new_user/request.yml"
+CreateNewUserResponse:
+  $ref: "./../operations/users/create_new_user/response.yml"
+

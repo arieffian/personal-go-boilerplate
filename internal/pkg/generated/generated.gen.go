@@ -7,6 +7,20 @@ const (
 	ApiKeyAuthScopes = "ApiKeyAuth.Scopes"
 )
 
+// CreateNewUserRequest defines model for CreateNewUserRequest.
+type CreateNewUserRequest struct {
+	Name string `json:"name"`
+}
+
+// CreateNewUserResponse defines model for CreateNewUserResponse.
+type CreateNewUserResponse struct {
+	Code int32 `json:"code"`
+
+	// User model.
+	Data    *User  `json:"data,omitempty"`
+	Message string `json:"message"`
+}
+
 // ErrorBadRequest defines model for ErrorBadRequest.
 type ErrorBadRequest struct {
 	Code    int32  `json:"code"`
@@ -85,3 +99,9 @@ type GetUsersParams struct {
 	// Page
 	Page int32 `form:"page" json:"page"`
 }
+
+// GetUsersJSONBody defines parameters for GetUsers.
+type GetUsersJSONBody = CreateNewUserRequest
+
+// GetUsersJSONRequestBody defines body for GetUsers for application/json ContentType.
+type GetUsersJSONRequestBody = GetUsersJSONBody
