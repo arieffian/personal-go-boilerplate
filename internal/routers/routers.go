@@ -7,6 +7,7 @@ import (
 	userRepository "github.com/arieffian/go-boilerplate/internal/repositories/users"
 	database "github.com/arieffian/providers/pkg/db"
 	"github.com/arieffian/providers/pkg/redis"
+	"github.com/arieffian/providers/pkg/validator"
 	"github.com/gofiber/fiber/v2"
 )
 
@@ -23,6 +24,8 @@ type NewRouterParams struct {
 }
 
 func NewRouter(p NewRouterParams) (*Router, error) {
+	validator := validator.NewValidatorService()
+
 	userRepo := userRepository.NewUserRepository(userRepository.NewUserRepositoryParams{
 		Db:    p.Db,
 		Redis: p.Redis,
@@ -31,8 +34,9 @@ func NewRouter(p NewRouterParams) (*Router, error) {
 
 	healthcheckHandler := handlers.NewHealthCheckHandler()
 	userHandler := handlers.NewUserHandler(handlers.NewUserHandlerParams{
-		UserRepo: userRepo,
-		Cfg:      p.Cfg,
+		UserRepo:  userRepo,
+		Cfg:       p.Cfg,
+		Validator: validator,
 	})
 
 	return &Router{
@@ -49,4 +53,5 @@ func (r *Router) RegisterRoutes(routes *fiber.App) {
 	users := v1.Group("/users").Use(middlewares.NewValidateAPIKey(r.cfg.ApiKey))
 	users.Get("/", r.users.GetUsers)
 	users.Get("/:id", r.users.GetUserById)
+	users.Post("/", r.users.CreateNewUser)
 }

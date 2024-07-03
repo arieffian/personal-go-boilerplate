@@ -7,20 +7,23 @@ import (
 	"github.com/arieffian/go-boilerplate/internal/config"
 	"github.com/arieffian/go-boilerplate/internal/pkg/generated"
 	userRepository "github.com/arieffian/go-boilerplate/internal/repositories/users"
+	"github.com/arieffian/providers/pkg/validator"
 	"github.com/gofiber/fiber/v2"
 	"gorm.io/gorm"
 )
 
 type userHandler struct {
-	userRepo userRepository.UserRepository
-	cfg      *config.Config
+	userRepo  userRepository.UserRepository
+	validator validator.ValidatorService
+	cfg       *config.Config
 }
 
 var _ UserService = (*userHandler)(nil)
 
 type NewUserHandlerParams struct {
-	UserRepo userRepository.UserRepository
-	Cfg      *config.Config
+	UserRepo  userRepository.UserRepository
+	Validator validator.ValidatorService
+	Cfg       *config.Config
 }
 
 func (h *userHandler) GetUsers(c *fiber.Ctx) error {
@@ -106,9 +109,57 @@ func (h *userHandler) GetUserById(c *fiber.Ctx) error {
 	return c.Status(int(response.Code)).JSON(response)
 }
 
+func (h *userHandler) CreateNewUser(c *fiber.Ctx) error {
+	params := new(CreateNewUserParams)
+	err := c.BodyParser(params)
+	if err != nil {
+		response := &generated.CreateNewUserResponse{
+			Code:    fiber.StatusBadRequest,
+			Message: err.Error(),
+			Data:    nil,
+		}
+		return c.Status(int(response.Code)).JSON(response)
+	}
+
+	err = h.validator.Validate(c.Context(), params)
+	if err != nil {
+		response := &generated.CreateNewUserResponse{
+			Code:    fiber.StatusBadRequest,
+			Message: err.Error(),
+			Data:    nil,
+		}
+		return c.Status(int(response.Code)).JSON(response)
+	}
+
+	user, err := h.userRepo.CreateNewUser(c.Context(), userRepository.CreateNewUserParams{
+		Name: params.Name,
+	})
+
+	if err != nil {
+		response := &generated.CreateNewUserResponse{
+			Code:    fiber.StatusInternalServerError,
+			Message: err.Error(),
+			Data:    nil,
+		}
+		return c.Status(int(response.Code)).JSON(response)
+	}
+
+	response := &generated.CreateNewUserResponse{
+		Code:    fiber.StatusOK,
+		Message: "OK",
+		Data: &generated.User{
+			Id:   user.User.ID,
+			Name: user.User.Name,
+		},
+	}
+
+	return c.Status(int(response.Code)).JSON(response)
+}
+
 func NewUserHandler(p NewUserHandlerParams) UserService {
 	return &userHandler{
-		userRepo: p.UserRepo,
-		cfg:      p.Cfg,
+		userRepo:  p.UserRepo,
+		cfg:       p.Cfg,
+		validator: p.Validator,
 	}
 }

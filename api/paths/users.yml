@@ -1,2 +1,4 @@
-post:
+get:
   $ref: "./../operations/users/get_users/operation.yml"
+post:
+  $ref: "./../operations/users/create_new_user/operation.yml"
