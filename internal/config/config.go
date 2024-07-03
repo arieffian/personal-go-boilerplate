@@ -6,6 +6,7 @@ import (
 )
 
 type Config struct {
+	ServiceName               string `mapstructure:"SERVICE_NAME"`
 	Environment               string `mapstructure:"ENVIRONMENT"`
 	Debug                     bool   `mapstructure:"DEBUG"`
 	DbMasterConnectionString  string `mapstructure:"DB_MASTER_CONNECTION_STRING"`
@@ -15,6 +16,7 @@ type Config struct {
 	RedisPort                 int    `mapstructure:"REDIS_PORT"`
 	CacheTTL                  int    `mapstructure:"CACHE_TTL"`
 	ApiKey                    string `mapstructure:"API_KEY"`
+	DefaultPageSize           int    `mapstructure:"DEFAULT_PAGE_SIZE"`
 }
 
 func NewConfig() (*Config, error) {

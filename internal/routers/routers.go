@@ -5,9 +5,9 @@ import (
 	"github.com/arieffian/go-boilerplate/internal/handlers"
 	"github.com/arieffian/go-boilerplate/internal/middlewares"
 	userRepository "github.com/arieffian/go-boilerplate/internal/repositories/users"
+	database "github.com/arieffian/providers/pkg/db"
 	"github.com/arieffian/providers/pkg/redis"
 	"github.com/gofiber/fiber/v2"
-	"gorm.io/gorm"
 )
 
 type Router struct {
@@ -17,7 +17,7 @@ type Router struct {
 }
 
 type NewRouterParams struct {
-	Db    *gorm.DB
+	Db    *database.DbInstance
 	Redis redis.RedisService
 	Cfg   *config.Config
 }
@@ -47,6 +47,6 @@ func (r *Router) RegisterRoutes(routes *fiber.App) {
 	v1.Get("/healthcheck", r.healthcheck.HealthCheckHandler)
 
 	users := v1.Group("/users").Use(middlewares.NewValidateAPIKey(r.cfg.ApiKey))
-	users.Get("/", r.users.ListUsers)
+	users.Get("/", r.users.GetUsers)
 	users.Get("/:id", r.users.GetUserById)
 }

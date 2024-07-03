@@ -1,5 +1,4 @@
 #!make
-include .env
 
 default: help
 

@@ -13,6 +13,7 @@ import (
 
 type Server struct {
 	Fiber *fiber.App
+	Redis redis.RedisService
 }
 
 func NewServer(ctx context.Context, cfg *config.Config) (*Server, error) {
@@ -48,6 +49,7 @@ func NewServer(ctx context.Context, cfg *config.Config) (*Server, error) {
 
 	return &Server{
 		Fiber: app,
+		Redis: redis,
 	}, nil
 
 }

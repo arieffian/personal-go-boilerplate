@@ -25,3 +25,6 @@ ErrorUnexpected:
 
 GetUserByIdResponse:
   $ref: "./../operations/users/get_user_by_id/response.yml"
+
+GetUsersResponse:
+  $ref: "./../operations/users/get_users/response.yml"

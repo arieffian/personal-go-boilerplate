@@ -9,8 +9,8 @@ servers:
     description: development server
 paths:
   # Users
-  # /users:
-  #   $ref: "./paths/users.yml"
+  /users:
+    $ref: "./paths/users.yml"
   /users/{id}:
     $ref: "./paths/users_id.yml"
 
