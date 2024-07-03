@@ -3,6 +3,7 @@ package users
 import (
 	"context"
 
+	"github.com/arieffian/go-boilerplate/internal/config"
 	"github.com/arieffian/go-boilerplate/internal/models"
 	"github.com/arieffian/providers/pkg/redis"
 	redis_pkg "github.com/redis/go-redis/v9"
@@ -12,6 +13,7 @@ import (
 type userRepository struct {
 	db      *gorm.DB
 	redisDb redis.RedisService
+	cfg     *config.Config
 }
 
 var _ UserInterface = (*userRepository)(nil)
@@ -19,6 +21,7 @@ var _ UserInterface = (*userRepository)(nil)
 type NewUserRepositoryParams struct {
 	Db    *gorm.DB
 	Redis redis.RedisService
+	Cfg   *config.Config
 }
 
 func (r *userRepository) GetUserById(ctx context.Context, p GetUserByIdParams) (*GetUserByIdResponse, error) {
@@ -49,5 +52,6 @@ func NewUserRepository(p NewUserRepositoryParams) *userRepository {
 	return &userRepository{
 		db:      p.Db,
 		redisDb: p.Redis,
+		cfg:     p.Cfg,
 	}
 }
