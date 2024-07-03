@@ -14,6 +14,7 @@ type Config struct {
 	RedisHost                 string `mapstructure:"REDIS_HOST"`
 	RedisPort                 int    `mapstructure:"REDIS_PORT"`
 	CacheTTL                  int    `mapstructure:"CACHE_TTL"`
+	ApiKey                    string `mapstructure:"API_KEY"`
 }
 
 func NewConfig() (*Config, error) {

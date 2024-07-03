@@ -27,7 +27,7 @@ func main() {
 
 	ctx := context.Background()
 
-	server, err := app.NewServer(ctx, *cfg)
+	server, err := app.NewServer(ctx, cfg)
 	if err != nil {
 		log.Fatalf("failed to create the new server: %s\n", err)
 	}

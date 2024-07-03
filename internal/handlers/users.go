@@ -3,6 +3,7 @@ package handlers
 import (
 	"errors"
 
+	"github.com/arieffian/go-boilerplate/internal/config"
 	"github.com/arieffian/go-boilerplate/internal/pkg/generated"
 	userRepository "github.com/arieffian/go-boilerplate/internal/repositories/users"
 	"github.com/gofiber/fiber/v2"
@@ -11,12 +12,14 @@ import (
 
 type userHandler struct {
 	userRepo userRepository.UserInterface
+	cfg      *config.Config
 }
 
 var _ UserService = (*userHandler)(nil)
 
 type NewUserHandlerParams struct {
 	UserRepo userRepository.UserInterface
+	Cfg      *config.Config
 }
 
 func (h userHandler) ListUsers(c *fiber.Ctx) error {
@@ -59,5 +62,6 @@ func (h userHandler) GetUserById(c *fiber.Ctx) error {
 func NewUserHandler(p NewUserHandlerParams) *userHandler {
 	return &userHandler{
 		userRepo: p.UserRepo,
+		cfg:      p.Cfg,
 	}
 }

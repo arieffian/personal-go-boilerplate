@@ -15,7 +15,7 @@ type Server struct {
 	Fiber *fiber.App
 }
 
-func NewServer(ctx context.Context, cfg config.Config) (*Server, error) {
+func NewServer(ctx context.Context, cfg *config.Config) (*Server, error) {
 
 	db := database.NewDbManager(database.DbConfig{
 		WriteDsn: cfg.DbMasterConnectionString,
@@ -37,6 +37,7 @@ func NewServer(ctx context.Context, cfg config.Config) (*Server, error) {
 	api, err := routers.NewRouter(routers.NewRouterParams{
 		Db:    dbClient,
 		Redis: redis,
+		Cfg:   cfg,
 	})
 
 	if err != nil {
